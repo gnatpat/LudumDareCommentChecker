@@ -1,5 +1,7 @@
 import urllib.request
 from time import sleep
+from GUI import Application
+from GUI.Alerts import alert
 
 def extract(html):
     html = html.replace("<br/>", "\n");
@@ -36,6 +38,8 @@ noOfComments = len(comments)
 print("\n\n\n" + str(noOfComments) + " comments in total.")
 time = int(input("How often should I check for more (seconds)? "))
 
+Application()
+
 while(True):
     print(".",end="",flush=True)
     sleep(time)
@@ -43,6 +47,7 @@ while(True):
     if (len(comments) > noOfComments):
         numberOfNew = noOfComments - len(comments)
         new = comments[numberOfNew:]
+        alert('note', 'New Comment!')
         print("\n****** NEW COMMENTS ******")
         printLine()
         printComments(new)
